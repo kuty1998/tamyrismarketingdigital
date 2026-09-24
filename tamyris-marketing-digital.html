@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tamyris Marketing Digital — Estratégia, Posicionamento e Crescimento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+
+    --bg-void:#0C0720;
+    --bg-deep:#170F35;
+    --bg-deep-2:#1F1348;
+    --roxo-1:#4C1D95;
+    --roxo-2:#7C3AED;
+    --lilas:#C6A9FF;
+    --dourado:#F2B705;
+    --dourado-suave:#F7D774;
+    --branco:#F6F3FF;
+    --texto-suave:#C6BCE6;
+    --linha:rgba(198,169,255,0.16);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+  body{
+    background:var(--bg-void);
+    color:var(--branco);
+    font-family:'Inter',sans-serif;
+    line-height:1.65;
+    overflow-x:hidden;
+  }
+  img,svg{max-width:100%}
+  a{color:inherit}
+  h1,h2,h3{font-family:'Poppins',sans-serif;font-weight:700;letter-spacing:-0.01em}
+
+  .container{max-width:1160px;margin:0 auto;padding:0 24px}
+
+  /* ===== FUNDO AMBIENTE ===== */
+  .campo-estrelas{position:fixed;inset:0;z-index:-2;background:var(--bg-void)}
+  .glow{position:fixed;border-radius:50%;filter:blur(90px);z-index:-1;pointer-events:none;opacity:.55;will-change:transform}
+  .glow-a{width:520px;height:520px;background:var(--roxo-1);top:-160px;left:-140px;animation:deriva-a 22s ease-in-out infinite}
+  .glow-b{width:460px;height:460px;background:var(--roxo-2);top:38%;right:-180px;opacity:.35;animation:deriva-b 26s ease-in-out infinite}
+  .glow-c{width:380px;height:380px;background:var(--dourado);bottom:-140px;left:22%;opacity:.14;animation:deriva-c 30s ease-in-out infinite}
+  @keyframes deriva-a{0%,100%{transform:translate(0,0)}50%{transform:translate(60px,40px)}}
+  @keyframes deriva-b{0%,100%{transform:translate(0,0)}50%{transform:translate(-50px,-60px)}}
+  @keyframes deriva-c{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,-30px) scale(1.12)}}
+
+  /* elementos flutuantes decorativos */
+  .flutuante{position:absolute;pointer-events:none;opacity:.5;filter:drop-shadow(0 8px 18px rgba(0,0,0,.35))}
+  @keyframes flutuar-lento{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-18px) rotate(6deg)}}
+  @keyframes flutuar-lento-inv{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(16px) rotate(-6deg)}}
+
+  /* revelação ao rolar a página */
+  [data-revelar]{opacity:0;transform:translateY(26px);transition:opacity .7s ease, transform .7s ease}
+  [data-revelar].visivel{opacity:1;transform:translateY(0)}
+  [data-revelar="esquerda"]{transform:translateX(-30px)}
+  [data-revelar="esquerda"].visivel{transform:translateX(0)}
+  [data-revelar="direita"]{transform:translateX(30px)}
+  [data-revelar="direita"].visivel{transform:translateX(0)}
+  @media (prefers-reduced-motion:reduce){
+    [data-revelar]{opacity:1;transform:none;transition:none}
+    .glow,.flutuante{animation:none}
+  }
+
+  /* ===== NAV ===== */
+  header.nav{
+    position:sticky;top:env(safe-area-inset-top,0px);z-index:50;
+    background:rgba(12,7,32,.72);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--linha);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1160px;margin:0 auto}
+  .marca{display:flex;align-items:center;gap:10px;font-family:'Poppins',sans-serif;font-weight:700;font-size:1.05rem}
+  .marca-icone{
+    width:34px;height:34px;border-radius:10px;
+    background:linear-gradient(135deg,var(--roxo-2),var(--dourado));
+    display:flex;align-items:center;justify-content:center;font-size:16px;
+    box-shadow:0 4px 16px rgba(124,58,237,.45);
+  }
+  nav.links{display:flex;gap:28px;font-size:.95rem;color:var(--texto-suave)}
+  nav.links a{text-decoration:none;transition:color .25s ease}
+  nav.links a:hover{color:var(--dourado-suave)}
+  .nav-cta{
+    display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:30px;
+    background:linear-gradient(90deg,var(--roxo-2),var(--roxo-1));
+    color:var(--branco);text-decoration:none;font-size:.9rem;font-weight:600;
+    box-shadow:0 6px 18px rgba(76,29,149,.4);transition:transform .25s ease;
+  }
+  .nav-cta:hover{transform:translateY(-2px)}
+  .menu-toggle{display:none}
+
+  /* ===== HERO ===== */
+  .hero{
+    min-height:92vh;display:flex;align-items:center;position:relative;
+    padding:140px 0 100px;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:50px;align-items:center}
+  .selo{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:7px 16px;border-radius:30px;border:1px solid var(--linha);
+    font-size:.82rem;color:var(--lilas);margin-bottom:26px;background:rgba(124,58,237,.08);
+  }
+  .selo span.ponto{width:7px;height:7px;border-radius:50%;background:var(--dourado);display:inline-block}
+  .hero h1{font-size:clamp(2.3rem,4.6vw,3.6rem);line-height:1.14;margin-bottom:22px}
+  .hero h1 em{
+    font-style:normal;
+    background:linear-gradient(90deg,var(--lilas),var(--dourado-suave));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p.lead{font-size:1.12rem;color:var(--texto-suave);max-width:520px;margin-bottom:36px}
+  .hero-ctas{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:44px}
+  .btn{
+    padding:15px 32px;border-radius:50px;font-weight:600;font-size:1rem;text-decoration:none;
+    display:inline-flex;align-items:center;gap:10px;transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .btn-primario{
+    background:linear-gradient(90deg,var(--roxo-2),var(--roxo-1));color:#fff;
+    box-shadow:0 10px 30px rgba(76,29,149,.45);
+    animation:pulsar 3.2s ease-in-out infinite;
+  }
+  .btn-primario:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(124,58,237,.5);animation-play-state:paused}
+  @keyframes pulsar{
+    0%,100%{box-shadow:0 10px 30px rgba(76,29,149,.45)}
+    50%{box-shadow:0 10px 38px rgba(124,58,237,.75),0 0 0 6px rgba(124,58,237,.08)}
+  }
+  .btn-secundario{
+    border:1px solid var(--linha);color:var(--branco);background:rgba(255,255,255,.02);
+  }
+  .btn-secundario:hover{border-color:var(--dourado-suave);color:var(--dourado-suave)}
+
+  .hero-stats{display:flex;gap:34px;flex-wrap:wrap}
+  .stat b{font-family:'Poppins',sans-serif;font-size:1.5rem;display:block;color:var(--dourado-suave)}
+  .stat span{font-size:.85rem;color:var(--texto-suave)}
+
+  /* CENA 3D DO HERO */
+  .hero-cena{position:relative;height:420px;perspective:1000px}
+  .orbita{
+    position:absolute;inset:0;border-radius:50%;
+    border:1px dashed var(--linha);
+  }
+  .orbita-1{width:320px;height:320px;top:50%;left:50%;animation:girar 26s linear infinite;transform-origin:center}
+  .orbita-2{width:230px;height:230px;top:50%;left:50%;animation:girar-inv 18s linear infinite;transform-origin:center}
+  @keyframes girar{0%{transform:translate(-50%,-50%) rotate(0deg)}100%{transform:translate(-50%,-50%) rotate(360deg)}}
+  @keyframes girar-inv{0%{transform:translate(-50%,-50%) rotate(0deg)}100%{transform:translate(-50%,-50%) rotate(-360deg)}}
+  .nucleo{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:150px;height:150px;border-radius:32px;
+    background:linear-gradient(150deg,var(--roxo-2),var(--roxo-1));
+    display:flex;align-items:center;justify-content:center;font-size:56px;
+    box-shadow:0 30px 70px rgba(76,29,149,.55), inset 0 0 40px rgba(255,255,255,.08);
+    transform-style:preserve-3d;
+    animation:flutuar 5s ease-in-out infinite alternate;
+  }
+  @keyframes flutuar{0%{transform:translate(-50%,-50%) translateY(0)}100%{transform:translate(-50%,-50%) translateY(-16px)}}
+  .icone-orbita{
+    position:absolute;width:58px;height:58px;border-radius:16px;
+    background:var(--bg-deep-2);border:1px solid var(--linha);
+    display:flex;align-items:center;justify-content:center;font-size:24px;
+    box-shadow:0 14px 30px rgba(0,0,0,.35);
+    transition:transform .08s linear;
+  }
+  .io-1{top:6%;left:52%}
+  .io-2{top:46%;left:2%}
+  .io-3{top:78%;left:60%}
+  .io-4{top:20%;left:82%}
+
+  /* ===== SEÇÕES ===== */
+  section{padding:110px 0}
+  .sec-cabecalho{max-width:640px;margin-bottom:56px}
+  .sec-cabecalho h2{font-size:clamp(1.8rem,3vw,2.4rem);margin-bottom:16px}
+  .sec-cabecalho p{color:var(--texto-suave);font-size:1.05rem}
+
+  /* SOBRE */
+  .sobre{background:linear-gradient(180deg,transparent,var(--bg-deep) 12%,var(--bg-deep) 88%,transparent);position:relative}
+  #servicos{position:relative}
+  .contato{position:relative}
+  .sobre-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center}
+  .sobre-cartao{
+    background:linear-gradient(160deg,var(--bg-deep-2),var(--bg-deep));
+    border:1px solid var(--linha);border-radius:24px;padding:34px;
+    position:relative;
+  }
+  .sobre-cartao .avatar{
+    width:72px;height:72px;border-radius:20px;
+    background:linear-gradient(135deg,var(--dourado),var(--roxo-2));
+    display:flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:20px;
+  }
+  .sobre-cartao h3{font-size:1.2rem;margin-bottom:6px}
+  .sobre-cartao span{color:var(--texto-suave);font-size:.92rem}
+  .sobre-texto p{color:var(--texto-suave);font-size:1.08rem;margin-bottom:18px}
+  .sobre-texto strong{color:var(--branco)}
+  .sobre-lista{list-style:none;margin-top:26px;display:grid;gap:14px}
+  .sobre-lista li{display:flex;gap:12px;align-items:flex-start;color:var(--texto-suave);font-size:.98rem}
+  .sobre-lista .marcador{
+    width:22px;height:22px;border-radius:7px;flex:none;margin-top:2px;
+    background:rgba(242,183,5,.14);color:var(--dourado-suave);
+    display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;
+  }
+
+  /* SERVIÇOS */
+  .servicos-grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+  .card-servico{
+    background:linear-gradient(165deg,var(--bg-deep-2),var(--bg-deep));
+    border:1px solid var(--linha);border-radius:20px;padding:28px;
+    transform-style:preserve-3d;transition:transform .12s ease, border-color .3s ease, box-shadow .3s ease;
+  }
+  .card-servico:hover{border-color:rgba(198,169,255,.4);box-shadow:0 22px 44px rgba(76,29,149,.28)}
+  .card-servico .ic{
+    width:48px;height:48px;border-radius:13px;margin-bottom:18px;
+    background:rgba(124,58,237,.15);display:flex;align-items:center;justify-content:center;font-size:22px;
+  }
+  .card-servico h3{font-size:1.08rem;margin-bottom:10px}
+  .card-servico p{color:var(--texto-suave);font-size:.95rem}
+
+  /* PROCESSO */
+  .processo-grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:0;position:relative}
+  .passo{padding:26px 22px;border-left:1px solid var(--linha)}
+  .passo:first-child{border-left:none}
+  .passo .num{font-family:'Poppins',sans-serif;font-size:.85rem;color:var(--dourado-suave);margin-bottom:10px;display:block}
+  .passo h3{font-size:1.02rem;margin-bottom:8px}
+  .passo p{color:var(--texto-suave);font-size:.9rem}
+
+  /* CONTATO */
+  .contato{
+    background:radial-gradient(circle at 30% 20%, rgba(124,58,237,.25), transparent 55%),
+               radial-gradient(circle at 80% 80%, rgba(242,183,5,.12), transparent 55%),
+               var(--bg-void);
+    border-top:1px solid var(--linha);
+  }
+  .contato-caixa{
+    background:linear-gradient(160deg,var(--bg-deep-2),var(--bg-deep));
+    border:1px solid var(--linha);border-radius:28px;padding:54px;text-align:center;
+  }
+  .contato-caixa h2{font-size:clamp(1.7rem,3vw,2.3rem);margin-bottom:14px}
+  .contato-caixa p{color:var(--texto-suave);max-width:520px;margin:0 auto 34px;font-size:1.05rem}
+  .contato-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
+  .link-contato{
+    display:flex;align-items:center;gap:10px;padding:14px 22px;border-radius:16px;
+    border:1px solid var(--linha);text-decoration:none;color:var(--branco);
+    transform-style:preserve-3d;transition:transform .1s ease, border-color .3s ease;
+  }
+  .link-contato:hover{border-color:var(--dourado-suave)}
+  .link-contato .ic{
+    width:38px;height:38px;border-radius:11px;background:rgba(124,58,237,.18);
+    display:flex;align-items:center;justify-content:center;font-size:18px;
+  }
+  .link-contato b{display:block;font-size:.95rem}
+  .link-contato span{display:block;color:var(--texto-suave);font-size:.82rem}
+
+  /* RODAPÉ */
+  footer{padding:34px 0;text-align:center;color:var(--texto-suave);font-size:.85rem;border-top:1px solid var(--linha)}
+  footer .marca{justify-content:center;margin-bottom:8px}
+
+  /* FAIXA EM MOVIMENTO */
+  .faixa{
+    border-top:1px solid var(--linha);border-bottom:1px solid var(--linha);
+    background:var(--bg-deep);overflow:hidden;padding:16px 0;
+  }
+  .faixa-trilho{display:flex;width:max-content;animation:rolar 26s linear infinite}
+  .faixa-trilho span{
+    display:flex;align-items:center;gap:12px;padding:0 34px;
+    font-family:'Poppins',sans-serif;font-weight:600;font-size:1rem;color:var(--texto-suave);
+    white-space:nowrap;
+  }
+  .faixa-trilho span b{color:var(--dourado-suave)}
+  @keyframes rolar{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion:reduce){.faixa-trilho{animation:none}}
+
+  @media (max-width:860px){
+    .hero-grid,.sobre-grid{grid-template-columns:1fr}
+    .hero-cena{height:300px;order:-1}
+    nav.links{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .nucleo{animation:none}
+    .card-servico,.icone-orbita,.link-contato{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="campo-estrelas"></div>
+<div class="glow glow-a"></div>
+<div class="glow glow-b"></div>
+<div class="glow glow-c"></div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="marca">
+      <div class="marca-icone">✦</div>
+      Tamyris <span style="color:var(--texto-suave);font-weight:500">Marketing Digital</span>
+    </div>
+    <nav class="links">
+      <a href="#sobre">Sobre</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#processo">Como funciona</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <a class="nav-cta" href="https://wa.me/5519989585145" target="_blank" rel="noopener">Falar agora</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="selo"><span class="ponto"></span> Estratégia digital para negócios locais</div>
+      <h1>Quem não é visto, não é lembrado — <em>e não vende.</em></h1>
+      <p class="lead">Sou a Tamyris. Ajudo negócios a construir uma presença digital de verdade: com posicionamento claro, conteúdo que conecta e um site que representa o seu trabalho como ele merece.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primario" href="https://wa.me/5519989585145" target="_blank" rel="noopener">💬 Conversar no WhatsApp</a>
+        <a class="btn btn-secundario" href="#servicos">Conhecer os serviços</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><b>Estratégia</b><span>ponta a ponta</span></div>
+        <div class="stat"><b>Sites &amp; Redes</b><span>desenvolvimento completo</span></div>
+        <div class="stat"><b>Atendimento</b><span>próximo e direto</span></div>
+      </div>
+    </div>
+
+    <div class="hero-cena" id="cena3d">
+      <div class="orbita orbita-1"></div>
+      <div class="orbita orbita-2"></div>
+      <div class="nucleo">🚀</div>
+      <div class="icone-orbita io-1" data-profundidade="30">📈</div>
+      <div class="icone-orbita io-2" data-profundidade="55">🎯</div>
+      <div class="icone-orbita io-3" data-profundidade="25">📱</div>
+      <div class="icone-orbita io-4" data-profundidade="45">✨</div>
+    </div>
+  </div>
+</section>
+
+<div class="faixa">
+  <div class="faixa-trilho">
+    <span>✦ <b>Estratégia</b> Digital</span>
+    <span>✦ <b>Posicionamento</b> de Marca</span>
+    <span>✦ <b>Conteúdo</b> que Converte</span>
+    <span>✦ <b>Crescimento</b> Real</span>
+    <span>✦ <b>Sites</b> Profissionais</span>
+    <span>✦ <b>Estratégia</b> Digital</span>
+    <span>✦ <b>Posicionamento</b> de Marca</span>
+    <span>✦ <b>Conteúdo</b> que Converte</span>
+    <span>✦ <b>Crescimento</b> Real</span>
+    <span>✦ <b>Sites</b> Profissionais</span>
+  </div>
+</div>
+
+<section class="sobre" id="sobre">
+  <div class="flutuante" style="top:8%;right:6%;font-size:34px;animation:flutuar-lento 7s ease-in-out infinite">💡</div>
+  <div class="flutuante" style="bottom:10%;left:4%;font-size:28px;animation:flutuar-lento-inv 8s ease-in-out infinite">✦</div>
+  <div class="container sobre-grid">
+    <div class="sobre-cartao" data-revelar="esquerda">
+      <div class="avatar">👩‍💻</div>
+      <h3>Tamyris</h3>
+      <span>Fundadora — Tamyris Marketing Digital</span>
+      <ul class="sobre-lista">
+        <li><span class="marcador">✓</span> Planejamento estratégico personalizado</li>
+        <li><span class="marcador">✓</span> Criação de sites e presença digital</li>
+        <li><span class="marcador">✓</span> Gestão de redes sociais e conteúdo</li>
+      </ul>
+    </div>
+    <div class="sobre-texto" data-revelar="direita">
+      <h2 style="margin-bottom:18px;font-size:clamp(1.6rem,2.8vw,2.1rem)">É hora de mostrar ao mundo o que você faz de melhor</h2>
+      <p>A <strong>Tamyris Marketing Digital</strong> existe para construir a presença digital verdadeira do seu negócio — com estratégia sólida, posicionamento certo e crescimento real, sem fórmulas prontas.</p>
+      <p>Cada projeto começa entendendo o negócio por dentro: o público, a concorrência e o que realmente diferencia aquela marca. A partir disso, nasce um site e um conteúdo que atraem, envolvem e convertem visitantes em clientes.</p>
+    </div>
+  </div>
+</section>
+
+<section id="servicos">
+  <div class="flutuante" style="top:4%;left:2%;font-size:30px;animation:flutuar-lento-inv 9s ease-in-out infinite">🌟</div>
+  <div class="flutuante" style="bottom:6%;right:3%;font-size:32px;animation:flutuar-lento 7.5s ease-in-out infinite">🔮</div>
+  <div class="container">
+    <div class="sec-cabecalho" data-revelar>
+      <h2>O que eu faço</h2>
+      <p>Um trabalho completo, do planejamento à execução — para que o seu negócio tenha uma presença digital coerente do primeiro ao último detalhe.</p>
+    </div>
+    <div class="servicos-grade">
+      <div class="card-servico" data-revelar><div class="ic">📘</div><h3>Estratégia Digital</h3><p>Planejamento completo: metas claras, caminho definido e a melhor forma de alcançar o seu público.</p></div>
+      <div class="card-servico" data-revelar><div class="ic">🎯</div><h3>Posicionamento de Marca</h3><p>Sua empresa reconhecida e lembrada, com uma identidade que se destaca da concorrência.</p></div>
+      <div class="card-servico" data-revelar><div class="ic">📈</div><h3>Crescimento &amp; Resultados</h3><p>Mais visibilidade e engajamento, com acompanhamento constante do que está funcionando.</p></div>
+      <div class="card-servico" data-revelar><div class="ic">📱</div><h3>Redes Sociais &amp; Conteúdo</h3><p>Conteúdo que atrai, conecta e converte — com gestão completa das redes do seu negócio.</p></div>
+      <div class="card-servico" data-revelar><div class="ic">🌐</div><h3>Criação de Sites</h3><p>Sites institucionais e landing pages profissionais, feitos sob medida para cada cliente.</p></div>
+      <div class="card-servico" data-revelar><div class="ic">💬</div><h3>Atendimento Próximo</h3><p>Contato direto comigo em cada etapa do projeto, sem burocracia e sem intermediários.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="processo">
+  <div class="container">
+    <div class="sec-cabecalho" data-revelar>
+      <h2>Como funciona o trabalho</h2>
+      <p>Um processo simples e transparente, do primeiro contato à entrega final.</p>
+    </div>
+    <div class="processo-grade">
+      <div class="passo" data-revelar><span class="num">Etapa 1</span><h3>Conversa inicial</h3><p>Entendo o seu negócio, seu público e seus objetivos com a presença digital.</p></div>
+      <div class="passo" data-revelar><span class="num">Etapa 2</span><h3>Estratégia e proposta</h3><p>Defino o caminho ideal: site, conteúdo ou gestão de redes, conforme a necessidade.</p></div>
+      <div class="passo" data-revelar><span class="num">Etapa 3</span><h3>Criação</h3><p>Desenvolvo o material com identidade própria, alinhado com você em cada etapa.</p></div>
+      <div class="passo" data-revelar><span class="num">Etapa 4</span><h3>Entrega e acompanhamento</h3><p>Entrego o projeto pronto e sigo disponível para ajustes e próximos passos.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="contato" id="contato">
+  <div class="flutuante" style="top:10%;left:5%;font-size:30px;animation:flutuar-lento 6.5s ease-in-out infinite">🚀</div>
+  <div class="flutuante" style="bottom:8%;right:6%;font-size:26px;animation:flutuar-lento-inv 8.5s ease-in-out infinite">💜</div>
+  <div class="container">
+    <div class="contato-caixa" data-revelar>
+      <h2>Vamos transformar sua presença digital?</h2>
+      <p>Me chame e conte um pouco sobre o seu negócio. Em pouco tempo já conseguimos montar o primeiro caminho juntos.</p>
+      <div class="contato-links">
+        <a class="link-contato" href="https://wa.me/5519989585145" target="_blank" rel="noopener">
+          <div class="ic">📱</div>
+          <div><b>WhatsApp</b><span>+55 19 98958-5145</span></div>
+        </a>
+        <a class="link-contato" href="https://instagram.com/tamyrismarketingdigital" target="_blank" rel="noopener">
+          <div class="ic">📸</div>
+          <div><b>Instagram</b><span>@tamyrismarketingdigital</span></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="marca"><div class="marca-icone" style="width:26px;height:26px;font-size:13px">✦</div> Tamyris Marketing Digital</div>
+    <p>© 2026 Tamyris Marketing Digital — Estratégia, Posicionamento e Crescimento.</p>
+  </div>
+</footer>
+
+<script>
+  // Parallax 3D nos ícones do hero, seguindo o ponteiro
+  (function(){
+    var cena = document.getElementById('cena3d');
+    if(!cena) return;
+    var icones = cena.querySelectorAll('.icone-orbita');
+    var nucleo = cena.querySelector('.nucleo');
+
+    function mover(e){
+      var rect = cena.getBoundingClientRect();
+      var cx = rect.left + rect.width/2;
+      var cy = rect.top + rect.height/2;
+      var dx = (e.clientX - cx) / (rect.width/2);
+      var dy = (e.clientY - cy) / (rect.height/2);
+
+      icones.forEach(function(ic){
+        var p = parseFloat(ic.dataset.profundidade) || 30;
+        ic.style.transform = 'translate(' + (dx*p) + 'px,' + (dy*p) + 'px)';
+      });
+      if(nucleo){
+        nucleo.style.transform = 'translate(-50%,-50%) rotateY(' + (dx*8) + 'deg) rotateX(' + (dy*-8) + 'deg)';
+      }
+    }
+    window.addEventListener('mousemove', mover, {passive:true});
+  })();
+
+  // Revelação suave dos elementos ao rolar a página
+  (function(){
+    var alvos = document.querySelectorAll('[data-revelar]');
+    if(!('IntersectionObserver' in window)){
+      alvos.forEach(function(el){ el.classList.add('visivel'); });
+      return;
+    }
+    var obs = new IntersectionObserver(function(entradas){
+      entradas.forEach(function(entrada){
+        if(entrada.isIntersecting){
+          entrada.target.classList.add('visivel');
+          obs.unobserve(entrada.target);
+        }
+      });
+    }, {threshold:0.15, rootMargin:'0px 0px -60px 0px'});
+    alvos.forEach(function(el){ obs.observe(el); });
+  })();
+
+
+  // Tilt 3D nos cards de serviço, ao passar o mouse
+  (function(){
+    document.querySelectorAll('.card-servico').forEach(function(card){
+      card.addEventListener('mousemove', function(e){
+        var r = card.getBoundingClientRect();
+        var x = (e.clientX - r.left) / r.width - 0.5;
+        var y = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = 'rotateY(' + (x*8) + 'deg) rotateX(' + (y*-8) + 'deg) translateY(-4px)';
+      });
+      card.addEventListener('mouseleave', function(){
+        card.style.transform = 'rotateY(0) rotateX(0) translateY(0)';
+      });
+    });
+  })();
+
+  // Leve 3D nos links de contato
+  (function(){
+    document.querySelectorAll('.link-contato').forEach(function(link){
+      link.addEventListener('mousemove', function(e){
+        var r = link.getBoundingClientRect();
+        var x = (e.clientX - r.left) / r.width - 0.5;
+        var y = (e.clientY - r.top) / r.height - 0.5;
+        link.style.transform = 'rotateY(' + (x*6) + 'deg) rotateX(' + (y*-6) + 'deg)';
+      });
+      link.addEventListener('mouseleave', function(){
+        link.style.transform = 'rotateY(0) rotateX(0)';
+      });
+    });
+  })();
+</script>
+</body>
+</html>
